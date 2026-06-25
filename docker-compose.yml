@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - dados_pg:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "streaming"
+      POSTGRES_PASSWORD: "streaming"
+      POSTGRES_DB: "streaming"
+    ports:
+      - "5433:5432"
+
+volumes:
+  dados_pg:
