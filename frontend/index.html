@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netiflix | Consultas</title>
+
+    <!-- Tailwind via CDN: sem instalação, só importar e usar as classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-zinc-950 text-white min-h-screen font-sans">
+    <!-- Cabeçalho -->
+    <header class="bg-zinc-900 border-b border-zinc-800 px-8 py-4">
+      <h1
+        class="text-red-600 text-2xl font-bold tracking-widest uppercase text-center"
+      >
+        Netiflix
+      </h1>
+    </header>
+
+    <!-- Main -->
+    <main class="px-8 py-10">
+      <h2 class="text-xl font-semibold mb-6 text-zinc-100 text-center">
+        Consultas disponíveis
+      </h2>
+
+      <!--
+        Grid de cards
+      -->
+      <div
+        id="cards"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+      ></div>
+    </main>
+
+    <!--
+      Modal (popup): Tabela resultante da consulta escolhida
+    -->
+    <div
+      id="modal"
+      class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+    >
+      <!-- Caixa do modal -->
+      <div
+        class="bg-zinc-900 border border-zinc-700 rounded-xl w-full max-w-3xl max-h-[85vh] flex flex-col"
+      >
+        <!-- Cabeçalho do modal: título + botão fechar -->
+        <div
+          class="flex items-center justify-between px-6 py-4 border-b border-zinc-700"
+        >
+          <h3 id="modal-titulo" class="text-lg font-semibold text-white"></h3>
+          <!-- Botão X que chama fecharModal() no script.js -->
+          <button
+            onclick="fecharModal()"
+            class="text-zinc-400 hover:text-white text-2xl leading-none"
+          >
+            &times;
+          </button>
+        </div>
+
+        <!-- Área de input: só aparece nas consultas parametrizadas (2 e 6) -->
+        <div
+          id="modal-input"
+          class="hidden px-6 py-4 border-b border-zinc-700 flex items-center gap-3"
+        >
+          <label
+            id="modal-label"
+            class="text-sm text-zinc-300 whitespace-nowrap"
+          ></label>
+          <input
+            id="modal-param"
+            type="number"
+            class="bg-zinc-800 border border-zinc-600 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:border-red-500 w-32"
+          />
+          <!-- Botão que dispara a busca com o parâmetro digitado -->
+          <button
+            onclick="buscarComParametro()"
+            class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-1.5 rounded"
+          >
+            Buscar
+          </button>
+        </div>
+
+        <!-- Área de resultado: tabela aparece aqui após o fetch -->
+        <div id="modal-resultado" class="overflow-auto px-6 py-4 flex-1"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
